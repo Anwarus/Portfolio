@@ -1,0 +1,22 @@
+{
+  "name": "portfolio",
+  "version": "0.0.1",
+  "description": "My personal portfolio",
+  "main": "main.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anwarus/Portfolio.git"
+  },
+  "author": "Anwarus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Anwarus/Portfolio/issues"
+  },
+  "homepage": "https://github.com/Anwarus/Portfolio#readme"
+}
