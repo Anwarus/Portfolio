@@ -97,21 +97,12 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*Placeholder for canvas element*/
+div#target {
+    width: 100%;
+    background-color: #201e50;
+    min-height: 100vh;
+}
 
 /* ==========================================================================
    Helper classes
