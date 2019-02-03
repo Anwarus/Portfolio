@@ -97,12 +97,35 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+body {
+    background-color: #605f5e;
+}
+
 /*Placeholder for canvas element*/
 div#target {
     width: 100%;
     background-color: #201e50;
     min-height: 100vh;
 }
+
+div.slide {
+    display: grid;
+    margin: 200px 30% 200px 30%;
+    color: #ebebd3;
+}
+
+div.title {
+    text-align: center;
+    width: 50%;
+    float: left;
+}
+
+div.content {
+    text-align: center;
+    width: 50%;
+    float: left;
+}
+
 
 /* ==========================================================================
    Helper classes
