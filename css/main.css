@@ -98,20 +98,20 @@ textarea {
    ========================================================================== */
 
 body {
-    background-color: #605f5e;
+    background-color: #1A6C9A;
 }
 
 /*Placeholder for canvas element*/
 div#target {
     width: 100%;
-    background-color: #201e50;
+    background-color: #072A4A;
     min-height: 100vh;
 }
 
 div.slide {
     display: grid;
-    margin: 200px 30% 200px 30%;
-    color: #ebebd3;
+    margin: 200px 25% 200px 25%;
+    color: #FCF2D0;
 }
 
 div.title {
@@ -126,6 +126,16 @@ div.content {
     float: left;
 }
 
+div.end {
+    text-align: center;
+    background-color: #072A4A;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+svg#decorator2 {
+    background-color: #072A4A;
+}
 
 /* ==========================================================================
    Helper classes
