@@ -99,6 +99,7 @@ textarea {
 
 body {
     background-color: #1A6C9A;
+    font-family: 'Nunito', sans-serif;
 }
 
 /*Placeholder for canvas element*/
@@ -110,18 +111,23 @@ div#target {
 
 div.slide {
     display: grid;
-    margin: 200px 25% 200px 25%;
+    margin: 100px 25% 100px 25%;
     color: #FCF2D0;
+    text-align: center;
+    font-size: 24px;
 }
 
 div.title {
-    text-align: center;
     width: 50%;
     float: left;
 }
 
-div.content {
-    text-align: center;
+div.single-content {
+    margin: auto;
+    width: 50%;
+}
+
+div.double-content {
     width: 50%;
     float: left;
 }
@@ -135,6 +141,60 @@ div.end {
 
 svg#decorator2 {
     background-color: #072A4A;
+}
+
+a {
+    color: #A9E5BB;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+a:hover {
+    color: #114b5f;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0%;
+}
+
+li {
+    margin-bottom: 10px;
+    text-align: left;
+    background-color: #0d0630;
+}
+
+button {
+    background-color: #072A4A;
+    color: black;
+    border: 1px solid #A9E5BB;
+    color: #A9E5BB;
+    font-size: 24px;
+    padding: 20px 20px 20px 20px;
+    border-radius: 1px;
+    transition: 0.2s;
+}
+
+button:hover {
+    color: #114b5f;
+    background-color: #A9E5BB;
+}
+
+p#copyright {
+    color: #A9E5BB;
+}
+
+.come-in {
+    transform: translateY(150px);
+    animation: come-in 0.8s ease forwards;
+}
+
+.come-in:nth-child(odd) {
+    animation-duration: 0.6s; /* So they look staggered */
+}
+  
+@keyframes come-in {
+    to { transform: translateY(0); }
 }
 
 /* ==========================================================================

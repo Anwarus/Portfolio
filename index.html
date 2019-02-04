@@ -12,6 +12,7 @@
     <!-- Place favicon.ico in the root directory -->
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> 
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -32,9 +33,13 @@
     <div class="slide">
         <section id="about">
             <header>
-                <div class="content">
-                    <h1>About</h1>
-                    <p>I'm full-stack engineer based near Rzeszów, Poland. I have passion for solving problems through code.</p>
+                <div class="double-content">
+                    <a href="#about"><h1>#About</h1></a>
+                    <p>
+                        I'm full-stack developer based near Rzeszów, Poland. 
+                        I truly like solving problems and providing solutions,
+                        mainly interested in web-dev both client and server side.
+                    </p>
                 </div>
                 <div class="title">
                     <i class="fas fa-portrait fa-10x"></i>
@@ -49,26 +54,53 @@
                 <div class="title">
                     <i class="fab fa-megaport fa-10x"></i>
                 </div>
-                <div class="content">
-                    <h1>Experience</h1>
-                    <p>I have two years of proffesional programming under the belt. I worked on many web and desktop applications.</p>
+                <div class="double-content">
+                    <a href="#experience"><h1>#Experience</h1></a>
+                    <p>
+                        I have two years of proffesional programming under the belt. 
+                        I worked especially on creating web applications with rich features
+                        and extending existing ones.
+                    </p>
                 </div>
             </header>
         </section>
     </div>
 
     <div class="slide">
-        <section id="experience">
+        <section id="passion">
             <header>
-                <div class="content">
-                    <h1>Skills</h1>
-                    <p>I have two years of proffesional programming under the belt. I worked on many web and desktop applications.</p>
+                <div class="double-content">
+                    <a href="#passion"><h1>#Passion</h1></a>
+                    <p>
+                        I have true passion in expressing solutions to defined problems through code.
+                        I love creative thinking, coming up with new ideas and unlimited possibilities 
+                        programming gives me. It's something that's keep me motivated and let be better
+                        than yesterday.
+                    </p>
                 </div>
                 <div class="title">
-                        <i class="fas fa-tasks fa-10x"></i>
+                        <i class="fas fa-user-astronaut fa-10x"></i>
                 </div>
             </header>
         </section>
+    </div>
+
+    <div class="slide">
+        <section id="skills">
+                <header>
+                    <div class="single-content">
+                        <a href="#skills"><h1>#Skills</h1></a>
+                        <ul>
+                            <li>good knowledge of C# along with ASP.NET MVC5/Core</li>
+                            <li>worked also with PHP on backend</li>
+                            <li>experience in HTML/CSS/JavaScript</li>
+                            <li>ability to learn quickly, very quickly</li>
+                            <li>decent knowledge of React</li>
+                            <li>solving problems skill</li>
+                        </ul>
+                    </div>
+                </header>
+            </section>
     </div>
 
     <svg id="decorator2" width="100%" height="200px" viewBox="0 0 200 50" preserveAspectRatio="none">
@@ -78,7 +110,19 @@
     <div class="end">
         <section id="contact">
             <footer>
-                <button type="button">Contact me!</button> 
+                <a href="mailto:smilos1289@gmail.com">
+                    <button type="button">
+                        <i class="far fa-envelope"></i>
+                        Contact me
+                    </button> 
+                </a>
+                <div style="margin-top: 50px;">
+                    <a href="https://github.com/Anwarus" class="fab fa-github-square fa-4x"></a>
+                    <a href="https://www.linkedin.com/in/sebastian-mi%C5%82o%C5%9B-14a2a1152/" class="fab fa-linkedin fa-4x"></a>
+                    <a href="https://dev.to/anwarus" class="fab fa-dev fa-4x"></a>
+                    <a href="https://twitter.com/Anwarus4" class="fab fa-twitter-square fa-4x"></a>
+                </div>
+                <p id="copyright">&copy; 2019 Sebastian Milos. All rights reserved.</p>             
             </footer>
         </section>
     </div>
