@@ -1,16 +1,21 @@
-import Circuit from './circuit';
+import * as Cir from './circuit';
 
 $(document).ready(function() {
     let canvas = createCanvas('screen', '#target');
     let context = canvas.getContext('2d');
-    //let circuit = new Circuit(canvas);
+    let circuit = Cir.Circuit(canvas);
+
+    circuit = Cir.randomizePaths(circuit);
+    circuit = Cir.setupInterpolations(circuit);
+
+    loop();
 
     function loop() {
         requestAnimationFrame(loop);
     
         context.clearRect(0, 0, canvas.width, canvas.height);
-        circuit.draw(context);
-    
+        Cir.update(circuit);
+        Cir.draw(circuit);
     }
 
     var win = $(window);
@@ -50,7 +55,7 @@ function createCanvas(id, target) {
 
     canvas.id = id;
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = window.innerHeight * (4/10);
 
     $(target).append(canvas);
 

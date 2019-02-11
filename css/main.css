@@ -106,25 +106,35 @@ body {
 div#target {
     width: 100%;
     background-color: #072A4A;
-    min-height: 100vh;
+    min-height: 40vh;
+}
+
+div#card {
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    color: #A9E5BB;
 }
 
 div.slide {
     display: grid;
     margin: 100px 25% 100px 25%;
     color: #FCF2D0;
-    text-align: center;
+    text-align: left;
     font-size: 24px;
 }
 
 div.title {
     width: 50%;
     float: left;
+    text-align: center;
 }
 
 div.single-content {
     margin: auto;
-    width: 50%;
+    width: 70%;
 }
 
 div.double-content {
@@ -159,9 +169,7 @@ ul {
 }
 
 li {
-    margin-bottom: 10px;
-    text-align: left;
-    background-color: #0d0630;
+
 }
 
 button {

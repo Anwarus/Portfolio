@@ -1,126 +1,198 @@
-export default class Circuit {
-    constructor({ width = 1920, height = 1080, cellSize = 10, pathCount = 160, minPathLength = 40, maxPathLength = 80, straightChance = 95 } = {}) {
-        this.width = width;
-        this.height = height;
-        this.cellSize = cellSize;
-        this.pathCount = pathCount;
-        this.minPathLength = minPathLength;
-        this.maxPathLength = maxPathLength;
-        this.straightChance = straightChance;
+import * as Vec from './vector.js';
+import { Interporation } from './interpolation.js';
 
-        this.collisionBoard = Array.from(
-            Array(Math.floor(width/cellSize)), 
-            () => new Array(Math.floor(height/cellSize)).fill(0)
+//Data
+const POSITION_STATE = {
+    EMPTY: 0,
+    BUSY: 1
+};
+
+export function Circuit(canvas, { cellSize = 10, pathCount = 100, minPathLength = 20, maxPathLength = 35, straightChance = 96 } = {}) {
+    return {
+        canvas,
+        settings: {
+            cellSize,
+            pathCount,
+            minPathLength,
+            maxPathLength,
+            straightChance
+        },
+        context: canvas.getContext('2d'),
+        width: canvas.width,
+        height: canvas.height,
+        paths: new Array(pathCount).fill([]),
+        interpolations: new Array(pathCount).fill({}),
+        collisionBoard: Array.from(
+            Array(Math.floor(canvas.width/cellSize)), 
+            () => new Array(Math.floor(canvas.height/cellSize)).fill(POSITION_STATE.EMPTY)
+        )
+    };
+}
+
+//Functions
+
+export function setupInterpolations(circuit) {
+    let circuitCopy = Object.assign({}, circuit);
+    circuitCopy.interpolations = circuitCopy.interpolations.map((interpolation, index) => {
+        return setupInterpolation(circuit.paths[index]);
+    });
+
+    return circuitCopy;
+}
+
+function setupInterpolation(path) {
+    return Interporation(path, { speed: Math.floor(Math.random() * 20 + 10) });
+}
+
+export function randomizePaths(circuit) {
+    let circuitCopy = Object.assign({}, circuit);
+
+    circuitCopy.paths = circuitCopy.paths.map(() => {
+        return randomizePath(circuitCopy.collisionBoard, circuitCopy.settings);
+    });
+    
+    return circuitCopy;
+}
+
+function randomizePath(collisionBoard, settings) {
+    let pathLength = Math.floor(Math.random() * (settings.maxPathLength - settings.minPathLength)) + settings.minPathLength;
+    let path = [];
+
+    for(let i=0; i<pathLength; i++) {
+        let vector = randomizeVector(
+            collisionBoard,
+            settings,
+            (i > 0) ? path[i - 1]: null 
         );
-        
-        this.paths = [];
 
-    }
-
-    generatePaths() {
-        for(let i=0; i<this.pathCount; i++) {
-            let path = [];
-            let pathLength = Math.floor(Math.random() * (this.maxPathLength - this.minPathLength)) + this.minPathLength;
-    
-            for(let j=0; j<pathLength; j++) {
-                if(path.length === 0) {
-                    let emptyIndex = this.getRandomEmptyIndex(
-                        this.collisionBoard.map(x => x[0])
-                    );
-                    path.push({ x: emptyIndex, y: 0 });
-                    this.collisionBoard[emptyIndex][0] = 1;
-
-                }
-                else {
-                    let possiblePositions = this.getPossiblePositions({ x: path[j-1].x, y: j });
-
-                    if(possiblePositions.length > 0) {
-                        let choosenPosition = this.choosePosition(possiblePositions);
-
-                        path.push(choosenPosition);
-                        this.collisionBoard[choosenPosition.x][choosenPosition.y] = 1;
-
-                    } else
-                        break;
-    
-                }      
-            }
-    
-            this.paths.push(path);
-    
-        }
-        
-    }
-
-    getRandomEmptyIndex(arr) {
-        let indexes = [];
-
-        for(let i=0; i<arr.length; i++) {
-            if(arr[i] === 0)
-                indexes.push(i);
-        }
-
-        return indexes[Math.floor(Math.random() * indexes.length)];
-
-    }
-
-    getPossiblePositions(position) {
-        let possiblePositions = [];
-
-        let possiblePosition = { x: position.x, y: position.y + 1 };
-
-        if(possiblePosition.y < this.collisionBoard[0].length) {
-            if(this.collisionBoard[possiblePosition.x][possiblePosition.y] === 0)
-                possiblePositions.push({ 'direction': 'straight','position': possiblePosition });
-        }
-
-        possiblePosition = { x: position.x + 1 , y: position.y + 1 };
-
-        if(possiblePosition.x < this.collisionBoard.length) {
-            if(this.collisionBoard[possiblePosition.x][possiblePosition.y] === 0 &&
-               this.collisionBoard[possiblePosition.x - 1][possiblePosition.y] === 0)
-                possiblePositions.push({ 'direction': 'turn','position': possiblePosition });
-        }
-
-        possiblePosition = { x: position.x - 1 , y: position.y + 1 };
-
-        if(possiblePosition.x >= 0) {
-            if(this.collisionBoard[possiblePosition.x][possiblePosition.y] === 0 &&
-               this.collisionBoard[possiblePosition.x + 1][possiblePosition.y] === 0)
-                possiblePositions.push({ 'direction': 'turn','position': possiblePosition });
-        }
-
-        return possiblePositions;
-
-    }
-
-    choosePosition(positions) {
-        if(positions.length === 1)
-            return positions[0].position;
-
-        if(positions[0].direction === 'straight') {
-            if(Math.floor(Math.random() * 100) < this.straightChance)
-                return positions[0].position;  
-            else
-                return positions[(Math.floor(Math.random() * (positions.length - 1))) + 1].position;
-        }
+        if(vector != null)
+            path.push(vector);
         else
-            return positions[Math.floor(Math.random() * positions.length)].position;
-
-    } 
-
-    draw(context) {
-        for(let j=0; j<this.paths.length; j++) {
-            let path = this.paths[j];
-
-            for(let i=0; i<path.length-1; i++) {
-                context.beginPath();
-                context.moveTo(path[i].x * this.cellSize, path[i].y * this.cellSize);
-                context.lineTo(path[i+1].x * this.cellSize, path[i+1].y * this.cellSize);
-                context.lineWidth = 5;
-                context.stroke();
-            }
-        }
+            break;
     }
 
+    return path;
+}
+
+function randomizeVector(collisionBoard, settings, lastVector = null) {
+    let vector = null;
+
+    if(lastVector == null) 
+        vector = setRandomStartPosition(collisionBoard);
+    else {
+        if(isMovingStraight(settings)) {
+            if(isStraightMovePossible(collisionBoard, lastVector))
+                vector = moveStraight(collisionBoard, lastVector);
+        } else {
+            if(isMovingLeft()) {
+                if(isLeftMovePossible(collisionBoard, lastVector))
+                    vector = moveLeft(collisionBoard, lastVector);
+            } else {
+                if(isRightMovePossible(collisionBoard, lastVector))
+                    vector = moveRight(collisionBoard, lastVector);
+            }
+        }
+
+    }
+
+    return vector;
+}
+
+function setRandomStartPosition(collisionBoard) {
+    let emptyIndex = getRandomEmptyIndex(collisionBoard.map(x => x[0]));
+    let vector = Vec.Vector(emptyIndex, 0);
+    collisionBoard[vector.x][vector.y] = POSITION_STATE.BUSY;
+
+    return vector;
+}
+
+function isMovingStraight(settings) {
+    return (Math.floor(Math.random() * 100) < settings.straightChance) ? true : false;
+}
+
+function isMovingLeft() {
+    return (Math.floor(Math.random() * 2) < 1) ? true : false;
+}
+
+function isStraightMovePossible(collisionBoard, lastVector) {
+    let possibleVector = Vec.Vector(lastVector.x, lastVector.y + 1);
+
+    if(possibleVector.y < collisionBoard[0].length)
+        if(collisionBoard[possibleVector.x][possibleVector.y] === POSITION_STATE.EMPTY)
+            return true;
+
+    return false;
+}
+
+function isLeftMovePossible(collisionBoard, lastVector) {
+    let possiblePosition = Vec.Vector(lastVector.x - 1, lastVector.y + 1);
+
+    if(possiblePosition.x >= 0 && possiblePosition.y < collisionBoard[0].length) {
+        if(collisionBoard[possiblePosition.x][possiblePosition.y] === POSITION_STATE.EMPTY &&
+           collisionBoard[possiblePosition.x + 1][possiblePosition.y] === POSITION_STATE.EMPTY)
+            return true;
+    }
+    
+    return false;
+}
+
+function isRightMovePossible(collisionBoard, lastVector) {
+    let possiblePosition = Vec.Vector(lastVector.x + 1, lastVector.y + 1);
+
+    if(possiblePosition.x < collisionBoard.length && possiblePosition.y < collisionBoard[0].length) {
+        if(collisionBoard[possiblePosition.x][possiblePosition.y] === POSITION_STATE.EMPTY &&
+           collisionBoard[possiblePosition.x - 1][possiblePosition.y] === POSITION_STATE.EMPTY)
+            return true;
+    }
+    
+    return false;
+}
+
+function moveStraight(collisionBoard, lastVector) {
+    let newVector = Vec.Vector(lastVector.x, lastVector.y + 1);
+    collisionBoard[newVector.x][newVector.y] = POSITION_STATE.BUSY;
+
+    return newVector;
+}
+
+function moveLeft(collisionBoard, lastVector) {
+    let newVector = Vec.Vector(lastVector.x - 1, lastVector.y + 1);
+    collisionBoard[newVector.x][newVector.y] = POSITION_STATE.BUSY;
+
+    return newVector;
+}
+
+function moveRight(collisionBoard, lastVector) {
+    let newVector = Vec.Vector(lastVector.x + 1, lastVector.y + 1);
+    collisionBoard[newVector.x][newVector.y] = POSITION_STATE.BUSY;
+
+    return newVector;
+}
+
+function getRandomEmptyIndex(array) {
+    let emptyIndexes = getEmptyIndexes(array);
+    return emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
+}
+
+function getEmptyIndexes(array) {
+    let emptyIndexes = [];
+    
+    array.map((value, index) => {
+        if(value === POSITION_STATE.EMPTY)
+            emptyIndexes.push(index);
+    });
+
+    return emptyIndexes;
+}
+
+export function update(circuit) {
+    for(let i=0; i<circuit.interpolations.length; i++) {
+        circuit.interpolations[i].update();
+    }
+}
+
+export function draw(circuit) {
+    for(let i=0; i<circuit.interpolations.length; i++) {
+        circuit.interpolations[i].draw(circuit.context, { cellSize: circuit.settings.cellSize });
+    }
 }
