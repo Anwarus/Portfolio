@@ -15,13 +15,33 @@ export function Interporation(path, { speed = 10 } = {}) {
         from: path[0],
         to: path[1] || null,
         point: Object.assign({}, path[0]),
+        radius: 0.5,
+        radiusGrow: true,
         offset: Vec.Vector(
             speed / 100.0 * displacement.x,
             speed / 100.0 * displacement.y
         ),
         update() {
-            if(this.to == null)
+            if(this.to == null) {
+                if(this.radiusGrow) {
+                    this.radius += 0.1;
+
+                    if(this.radius >= 3) {
+                        this.radius = 3;
+                        this.radiusGrow = false;
+                    }
+                }
+                else {
+                    this.radius -= 0.1;
+
+                    if(this.radius <= 0) {
+                        this.radius = 0;
+                        this.radiusGrow = true;
+                    }
+                }
+
                 return;
+            }
 
             this.point = Vec.add(this.point, this.offset);
 
@@ -56,7 +76,7 @@ export function Interporation(path, { speed = 10 } = {}) {
                 let point = this.path[this.path.length - 1];
 
                 context.beginPath();
-                context.arc(point.x * cellSize, point.y * cellSize, 3, 0, 2 * Math.PI);
+                context.arc(point.x * cellSize, point.y * cellSize, this.radius, 0, 2 * Math.PI);
                 context.stroke();
             }
 
