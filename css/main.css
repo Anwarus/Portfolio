@@ -111,8 +111,8 @@ div#target {
 
 div#card {
     position: absolute;
-    left: 25%;
-    right: 25%;
+    left: 40%;
+    right: 40%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
     color: #A9E5BB;
