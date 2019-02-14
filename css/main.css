@@ -111,11 +111,22 @@ div#target {
 
 div#card {
     position: absolute;
-    left: 40%;
-    right: 40%;
+    left: 32%;
+    right: 32%;
+    margin-top: 100px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
     color: #A9E5BB;
+    background-color: #072A4ACC;
+    padding-top: 10px;
+}
+
+div#github-status {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    color: #1A6C9A;
+    background-color: #f9dc5c;
+    margin: 0px 200px 0px 200px;
 }
 
 div.slide {
@@ -134,7 +145,7 @@ div.title {
 
 div.single-content {
     margin: auto;
-    width: 70%;
+    width: 68%;
 }
 
 div.double-content {
@@ -166,10 +177,6 @@ a:hover {
 ul {
     list-style-type: none;
     padding-left: 0%;
-}
-
-li {
-
 }
 
 button {
@@ -208,6 +215,16 @@ p#copyright {
 
 @keyframes come-in {
     to { transform: translateY(0); }
+}
+
+hr { 
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)); 
+}
+
+i.list {
+    width: 28px;
 }
 
 /* ==========================================================================
