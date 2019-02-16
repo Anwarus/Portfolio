@@ -121,14 +121,6 @@ div#card {
     padding-top: 10px;
 }
 
-div#github-status {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
-    color: #1A6C9A;
-    background-color: #f9dc5c;
-    margin: 0px 200px 0px 200px;
-}
-
 div.slide {
     display: grid;
     margin: 100px 25% 100px 25%;
@@ -225,6 +217,47 @@ hr {
 
 i.list {
     width: 28px;
+}
+
+.github-status {
+    margin: 100px 40% 100px 40%; 
+    padding: 10px 10px 10px 10px;
+    background-color: #f9dc5c;
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.flex {
+    display: flex;
+}
+
+.card-left {
+    width: 50%; 
+    text-align: left;
+}
+
+.card-right {
+    width: 50%; 
+    text-align: right;
+}
+
+.card-bottom {
+    margin-top: 40px;
+    display: flex; 
+    flex-direction: column; 
+    text-align: left;
+}
+
+.github-stack {
+    font-size: 0.8rem;
+}
+
+.github-title {
+    text-align: left;
+    font-size: 2rem;
+}
+
+.github-description {
+    max-height: 70px; overflow:hidden;
 }
 
 /* ==========================================================================
