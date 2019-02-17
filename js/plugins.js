@@ -22,3 +22,17 @@
 }());
 
 // Place any jQuery/helper plugins in here.
+
+(function($) {
+  
+    $.fn.discovered = function() {
+        let $t = $(this);
+        let $w = $(window);
+        let viewBottom = $w.scrollTop() + $w.height();
+        let top = $t.offset().top;
+      
+        return (top <= viewBottom);
+  
+    };
+      
+})(jQuery);
