@@ -100,6 +100,7 @@ textarea {
 body {
     background-color: #1A6C9A;
     font-family: 'Nunito', sans-serif;
+    font-size: 24px;
 }
 
 /*Placeholder for canvas element*/
@@ -109,50 +110,97 @@ div#target {
     min-height: 40vh;
 }
 
-div#card {
+/*Profile card on top*/
+.profile-card {
     position: absolute;
-    left: 32%;
-    right: 32%;
+    width: 400px;
+    height: 250px;
+    margin: auto;
     margin-top: 100px;
+    left: 0;
+    right: 0;
+    font-size: 1rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
     color: #A9E5BB;
-    background-color: #072A4ACC;
+    background-color: #072A4ADD;
     padding-top: 10px;
 }
 
-div.slide {
-    display: grid;
-    margin: 100px 25% 100px 25%;
+/*Slides with content*/
+/*-------------------*/
+.slide {
+    display: flex;
+    flex-direction: row;
+    width: 860px;
+    margin: auto;
+    margin-top: 100px;
     color: #FCF2D0;
     text-align: left;
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
-div.title {
+@media screen and (max-width: 800px) {
+    .slide {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        margin: auto;
+        color: #FCF2D0;
+        text-align: left;
+        font-size: 1.2rem;
+    }
+}
+
+.title {
     width: 50%;
-    float: left;
     text-align: center;
 }
 
-div.single-content {
+@media screen and (max-width: 800px) {
+    .title {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.single-content {
     margin: auto;
     width: 68%;
 }
 
-div.double-content {
-    width: 50%;
-    float: left;
+@media screen and (max-width: 800px) {
+    .single-content {
+        width: 100%;
+        margin: auto;
+    }
 }
 
-div.end {
+.double-content {
+    width: 50%;
+}
+
+@media screen and (max-width: 800px) {
+    .double-content {
+        width: 100%;
+    }
+}
+
+.end {
     text-align: center;
     background-color: #072A4A;
     padding-top: 100px;
     padding-bottom: 100px;
 }
 
+/*-------------------*/
+
+svg#decorator1 {
+    height: 15vh;
+}
+
 svg#decorator2 {
+    height: 15vh;
     background-color: #072A4A;
 }
 
@@ -219,8 +267,9 @@ i.list {
     width: 28px;
 }
 
-.card-github {
-    margin: 50px 40% 50px 40%; 
+.card-github { 
+    width: 400px;
+    margin: auto;
     padding: 10px 10px 10px 10px;
     background-color: #f9dc5c;
     box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
