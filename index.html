@@ -117,20 +117,36 @@
 
     <hr>
 
-    <div class="github-status">
-        <div class="flex">
-            <div class="card-left">15.02.19</div>
-            <div class="card-right">
-                <a class="github-button" href="https://github.com/Anwarus/Portfolio/subscription" data-icon="octicon-eye" aria-label="Watch Anwarus/Portfolio on GitHub">Watch</a>
-                <a class="github-button" href="https://github.com/ntkme/github-buttons" data-icon="octicon-star" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-                <a class="github-button" href="https://github.com/ntkme/github-buttons/fork" data-icon="octicon-repo-forked" aria-label="Fork ntkme/github-buttons on GitHub">Fork</a>
+    <div class="last-slide">
+        Recent side-project I was working on
+        <div class="card-github">
+            <div class="loader"></div>
+            <div class="content hidden">
+                <div class="flex">
+                    <div class="card-left">
+                        <div class="github-date">XX.XX.XXXX</div>
+                    </div>
+                    <div class="card-right">
+                        <a class="github-button watch" href="https://github.com/Anwarus/Portfolio/subscription" data-icon="octicon-eye" aria-label="Watch Anwarus/Portfolio on GitHub">Watch</a>
+                        <a class="github-button star" href="https://github.com/Anwarus/Portfolio" data-icon="octicon-star" aria-label="Star Anwarus/Portfolio on GitHub">Star</a>
+                        <a class="github-button fork" href="https://github.com/Anwarus/Portfolio/fork" data-icon="octicon-repo-forked" aria-label="Fork Anwarus/Portfolio on GitHub">Fork</a>
+                    </div>
+                </div>
+                <div class="card-bottom">
+                    <div class="github-stack">HTML/CSS/JavaScript</div>
+                    <div class="github-title">Portfolio</div>
+                    <div class="github-description">My own portfolio website</div>
+                </div>
+                <div class="card-footer">
+                    <div class="github-info">Fetched with Github GraphQL API</div>
+                </div>
+            </div>
+            <div class="error hidden">
+                <i class="far fa-sad-cry fa-4x"></i></br>
+                Unfortunately there was a problem during fetching data from Github
             </div>
         </div>
-        <div class="card-bottom">
-            <div class="github-stack">HTML/CSS/JavaScript</div>
-            <div class="github-title">Portfolio</div>
-            <div class="github-description">My own portfolio website</div>
-        </div>
+        Check out more on Github
     </div>
 
     <svg id="decorator2" width="100%" height="200px" viewBox="0 0 200 50" preserveAspectRatio="none">
