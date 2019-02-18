@@ -3,7 +3,15 @@ import * as Cir from './circuit';
 $(document).ready(function() {
     let canvas = createCanvas('screen', '#target');
     let context = canvas.getContext('2d');
-    let circuit = Cir.Circuit(canvas);
+    let cellSize = 10;
+    let circuit = Cir.Circuit(canvas, 
+        {
+            cellSize: cellSize, 
+            pathCount: Math.floor(canvas.width/cellSize * 8/10.),
+            minPathLength: Math.floor(canvas.height/cellSize * 6/10.),
+            maxPathLength: Math.floor(canvas.height/cellSize)
+        }
+    );
 
     circuit = Cir.randomizePaths(circuit);
     circuit = Cir.setupInterpolations(circuit);
@@ -47,12 +55,29 @@ $(document).ready(function() {
             } 
         });
     });
+
+    $(window).resize(function(event) {
+        $('canvas').width(window.innerWidth);
+        $('canvas').height(window.innerHeight * (4/10));
+
+        circuit = Cir.Circuit(canvas, 
+            {
+                cellSize: cellSize, 
+                pathCount: Math.floor(canvas.width/cellSize * 8/10.),
+                minPathLength: Math.floor(canvas.height/cellSize * 6/10.),
+                maxPathLength: Math.floor(canvas.height/cellSize)
+            }
+        );
+
+        circuit = Cir.randomizePaths(circuit);
+        circuit = Cir.setupInterpolations(circuit);
+    });
     
 });
 
 fetch('https://api.github.com/graphql', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer 7f249d17e6a63de60326527e013909682bc30f82' },
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer e105e4f0d33d4a891f8676156901bafdd77b6a78' },
     body: JSON.stringify({ query: 
         `{
             user(login: "Anwarus") {
@@ -94,7 +119,7 @@ fetch('https://api.github.com/graphql', {
         $(card).children('.content').removeClass('hidden');
     })
     .catch(error => {
-        console.log("Error: ", error);
+        console.log('Error: ', error);
 
         let card = $('.card-github');
 

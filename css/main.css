@@ -103,6 +103,12 @@ body {
     font-size: 24px;
 }
 
+@media screen and (max-width: 800px) {
+    body {
+        font-size: 16px;
+    }
+}
+
 /*Placeholder for canvas element*/
 div#target {
     width: 100%;
@@ -127,6 +133,15 @@ div#target {
     padding-top: 10px;
 }
 
+@media screen and (max-width: 800px) {
+    .profile-card {
+        width: 300px;
+        height: 180px;
+        margin-top: 20px;
+        font-size: 0.7rem;
+    }
+}
+
 /*Slides with content*/
 /*-------------------*/
 .slide {
@@ -136,20 +151,22 @@ div#target {
     margin: auto;
     margin-top: 100px;
     margin-bottom: 100px;
+    padding: 0 10px 0 10px;
     color: #FCF2D0;
     text-align: left;
     font-size: 1.5rem;
+    box-sizing: border-box;
 }
 
 @media screen and (max-width: 800px) {
     .slide {
         display: flex;
         flex-direction: column;
-        width: 400px;
+        width: 360px;
         margin: auto;
         color: #FCF2D0;
         text-align: left;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 }
 
@@ -238,6 +255,7 @@ button:hover {
 
 p#copyright {
     color: #A9E5BB;
+    font-size: 0.8rem;
 }
 
 .come-in {
@@ -269,6 +287,7 @@ i.list {
 }
 
 .card-github { 
+    box-sizing: border-box;
     width: 400px;
     margin: auto;
     padding: 10px 10px 10px 10px;
@@ -276,6 +295,13 @@ i.list {
     box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: #114b5f;
 }
+
+@media screen and (max-width: 800px) {
+    .card-github {
+        width: 340px;
+    }
+}
+
 
 .flex {
     display: flex;
