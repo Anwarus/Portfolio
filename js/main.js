@@ -1,6 +1,9 @@
 import * as Cir from './circuit';
 
 $(document).ready(function() {
+    let width = $(document).width();
+    let height = $(document).height();
+
     let canvas = createCanvas('screen', '#target');
     let context = canvas.getContext('2d');
     let cellSize = 10;
@@ -57,20 +60,26 @@ $(document).ready(function() {
     });
 
     $(window).resize(function(event) {
-        $('canvas').width(window.innerWidth);
-        $('canvas').height(window.innerHeight * (4/10));
+        if(width !== $(document).width() || height !== $(document).height()) {
+            width = $(document).width();
+            height = $(document).height();
 
-        circuit = Cir.Circuit(canvas, 
-            {
-                cellSize: cellSize, 
-                pathCount: Math.floor(canvas.width/cellSize * 8/10.),
-                minPathLength: Math.floor(canvas.height/cellSize * 6/10.),
-                maxPathLength: Math.floor(canvas.height/cellSize)
-            }
-        );
+            $('canvas').width(window.innerWidth);
+            $('canvas').height(window.innerHeight * (4/10));
 
-        circuit = Cir.randomizePaths(circuit);
-        circuit = Cir.setupInterpolations(circuit);
+            circuit = Cir.Circuit(canvas, 
+                {
+                    cellSize: cellSize, 
+                    pathCount: Math.floor(canvas.width/cellSize * 8/10.),
+                    minPathLength: Math.floor(canvas.height/cellSize * 6/10.),
+                    maxPathLength: Math.floor(canvas.height/cellSize)
+                }
+            );
+
+            circuit = Cir.randomizePaths(circuit);
+            circuit = Cir.setupInterpolations(circuit);
+        }
+
     });
     
 });
@@ -99,8 +108,6 @@ fetch('https://api.github.com/graphql', {
 })
     .then(res => res.json())
     .then(res => {
-        console.log(res.data);
-
         let card = $('.card-github');
         let recentRepository = res.data.user.repositories.nodes[0];
         let lastUpdate = new Date(recentRepository.pushedAt);
@@ -119,8 +126,6 @@ fetch('https://api.github.com/graphql', {
         $(card).children('.content').removeClass('hidden');
     })
     .catch(error => {
-        console.log('Error: ', error);
-
         let card = $('.card-github');
 
         $(card).children('.loader').hide();
