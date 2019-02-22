@@ -103,6 +103,22 @@ body {
     font-size: 24px;
 }
 
+#avatar {
+    width: 70%;
+    height: 70%;
+}
+
+.avatar-signature {
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+}
+
+.avatar-signature h1,h3 {
+    margin: 0;
+    text-shadow: 2px 2px #000000;
+}
+
 @media screen and (max-width: 800px) {
     body {
         font-size: 16px;
@@ -130,7 +146,6 @@ div#target {
     text-align: center;
     color: #A9E5BB;
     background-color: #072A4ADD;
-    padding-top: 10px;
 }
 
 @media screen and (max-width: 800px) {
