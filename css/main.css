@@ -387,6 +387,24 @@ i.list {
     padding-top: 50px;
 }
 
+.navi-container {
+    height: 100px;
+}
+
+.navi-icon {
+    animation: MoveUpDown 1s linear infinite;
+    margin-top: 0px;
+}
+  
+@keyframes MoveUpDown {
+    0%, 100% {
+        margin-top: 0px;
+    }
+    50% {
+        margin-top: 15px;
+    }
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */

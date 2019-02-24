@@ -84,37 +84,27 @@ $(document).ready(function() {
     
 });
 
-fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer e105e4f0d33d4a891f8676156901bafdd77b6a78' },
-    body: JSON.stringify({ query: 
-        `{
-            user(login: "Anwarus") {
-                repositories(first: 1, orderBy: {field: PUSHED_AT, direction: DESC}) {
-                    nodes {
-                        name
-                        pushedAt
-                        description
-                        languages(first: 10) {
-                            nodes {
-                                name
-                            }
-                        }
-                    }
-                }
-            }
-        }`
-    }),
+fetch('https://api.github.com/users/Anwarus/repos', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
 })
     .then(res => res.json())
     .then(res => {
+        let recentRepository = res.sort(function compare(repo1, repo2) {
+            let repo1Date = new Date(repo1.pushed_at);
+            let repo2Date = new Date(repo2.pushed_at);
+            
+            if(repo1Date > repo2Date)
+                return -1;
+            return 1;
+        })[0];
+
         let card = $('.card-github');
-        let recentRepository = res.data.user.repositories.nodes[0];
-        let lastUpdate = new Date(recentRepository.pushedAt);
-        let stack = (recentRepository.languages.nodes).map(language => language.name);
+        let lastUpdate = new Date(recentRepository.pushed_at);
+        let stack = recentRepository.language;
 
         $(card).find('.github-date').text(lastUpdate.toISOString().substring(0, 10));
-        $(card).find('.github-stack').text(stack.join('/'));
+        $(card).find('.github-stack').text(stack);
         $(card).find('.github-title').text(recentRepository.name);
         $(card).find('.github-description').text(recentRepository.description);
 
